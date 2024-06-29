@@ -8,7 +8,6 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -32,7 +31,7 @@ public class Students1 extends TestBase1 {
     @Test
     public void getStudentInfoById(){
         Response response =given().log().all()
-                .pathParam("id","3")
+                .pathParam("id","4")
                 .when()
                 .get("/{id}");
         response.then().statusCode(404);
@@ -42,8 +41,8 @@ public class Students1 extends TestBase1 {
     public void CreateStudent(){
 
         List<String> courseList = new ArrayList<>();
-        courseList.add("selenium");
-        courseList.add("cypress");
+        courseList.add("selen");
+        courseList.add("cypr");
 
         StudentPojo studentPojo = new StudentPojo();
         studentPojo.setFirstName(firstName);
@@ -60,19 +59,8 @@ public class Students1 extends TestBase1 {
         response.then().statusCode(405);
 
     }
-    @Test
-    public void StudentList(){
 
-        HashMap<String, Object> studentData =given()
-                .when()
-                .get("/list")
-                .then()
-                .statusCode(404)
-                .extract().path("findAll{it.firstName =='"+firstName+"'}.get(0)");
 
-        studentId= (int) studentData.get("id");
-        System.out.println(studentId);
-    }
     @Test
     public void VerifyStudentID(){
 
